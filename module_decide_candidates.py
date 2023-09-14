@@ -42,7 +42,8 @@ def scan_candidates(frame):
             continue
 
     return potential_buy
-    
+
+# print(scan_candidates(frame))  
 
 
 # from alpaca.trading.client import TradingClient
