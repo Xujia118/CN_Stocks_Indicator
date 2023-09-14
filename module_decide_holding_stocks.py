@@ -3,7 +3,7 @@ import yfinance as yf
 
 def decide_holding_stocks():
     holding_stocks = ['600196.ss', 
-                      '600837.ss']
+                      '600570.ss']
 
     result = []
     for stock in holding_stocks:
@@ -18,5 +18,5 @@ def decide_holding_stocks():
     
     return result
 
-print(decide_holding_stocks())
+# print(decide_holding_stocks())
 
