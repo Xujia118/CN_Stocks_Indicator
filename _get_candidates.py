@@ -8,3 +8,4 @@ filt =  (df['marketCap'] >= 70_000_000_000) & \
 df = df.loc[filt]
 
 df.to_csv('Candidates_CSI300.csv')
+print("Candidates updated!")

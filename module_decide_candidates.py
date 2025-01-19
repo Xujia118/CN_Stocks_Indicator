@@ -32,12 +32,12 @@ def scan_candidates(frame):
             ta = TechnicalAnalysis(df)
             ta.good_to_buy()
 
-            if df['good_to_buy'][-1] == True:
-                price = df['Close'][-1]
+            if df['good_to_buy'].iloc[-1] == True:
+                price = df['Close'].iloc[-1]
                 if price * 100 >= parameters.total_equity * 0.2:
                     continue
 
-                potential_buy.append((ticker, df['Close'][-1]))
+                potential_buy.append((ticker, df['Close'].iloc[-1]))
         except:
             continue
 

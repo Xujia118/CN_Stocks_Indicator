@@ -2,8 +2,7 @@ import module_technical_analysis
 import yfinance as yf
 
 def decide_holding_stocks():
-    holding_stocks = ['600196.ss', 
-                      '600570.ss']
+    holding_stocks = ['600196.ss']
 
     result = []
     for stock in holding_stocks:

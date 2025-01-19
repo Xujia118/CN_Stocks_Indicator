@@ -1,0 +1,8 @@
+__pycache__/
+config.py
+.DS_Store
+myenv/
+.myenv/
+.env
+python/
+.python/
