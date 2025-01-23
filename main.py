@@ -4,10 +4,10 @@ import smtplib
 from datetime import date
 import pandas as pd
 from email.message import EmailMessage
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os
 
-load_dotenv()
+# load_dotenv()
 
 frame = pd.read_csv('Candidates_CSI300.csv')
 
