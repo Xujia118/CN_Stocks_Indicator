@@ -6,6 +6,7 @@ import parameters
 class TechnicalAnalysis:
     def __init__(self, df) -> None:
         self.df = df
+        self.df.columns = self.df.columns.droplevel(1)
         self.boll_tolerance = parameters.boll_tolerance
         self.small_candle_tolerance = parameters.small_candle_tolerance
         self.consolidation_tolerance = parameters.consolidation_tolerance
@@ -23,22 +24,16 @@ class TechnicalAnalysis:
     def SMA120(self):
         # forbig buying if a large portion of close for the past quarter is under SMA120
         self.df['SMA120'] = self.df['Close'].rolling(window=120).mean()
-        self.df['above_SMA120'] = np.where(
-            self.df['Close'] > self.df['SMA120'], True, False)
-        self.df['check_SMA120'] = self.df['above_SMA120'].rolling(
-            window=120).sum() / 120
+        self.df['above_SMA120'] = np.where(self.df['Close'] > self.df['SMA120'], True, False)
+        self.df['check_SMA120'] = self.df['above_SMA120'].rolling(window=120).sum() / 120
 
     def Bollinger(self):
         self.df['SMA20'] = self.df['Close'].rolling(window=20).mean()
-        self.df['Upper'] = self.df['SMA20'] + 2 * \
-            self.df['Close'].rolling(window=20).std()
-        self.df['Lower'] = self.df['SMA20'] - 2 * \
-            self.df['Close'].rolling(window=20).std()
+        self.df['Upper'] = self.df['SMA20'] + 2 * self.df['Close'].rolling(window=20).std()
+        self.df['Lower'] = self.df['SMA20'] - 2 * self.df['Close'].rolling(window=20).std()
 
-        self.df['Boll_buy'] = np.where(
-            self.df['Low'] * (1 - self.boll_tolerance) <= self.df['Lower'], True, False)
-        self.df['Boll_sell'] = np.where(
-            self.df['High'] * (1 + self.boll_tolerance) >= self.df['Upper'], True, False)
+        self.df['Boll_buy'] = np.where(self.df['Low'] * (1 - self.boll_tolerance) <= self.df['Lower'], True, False)
+        self.df['Boll_sell'] = np.where(self.df['High'] * (1 + self.boll_tolerance) >= self.df['Upper'], True, False)
 
     def sell_consolidation(self):
         yesterday_df = self.df.shift(1, fill_value=0)
